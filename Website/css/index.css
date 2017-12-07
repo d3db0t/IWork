@@ -1,0 +1,63 @@
+.loginbtn {
+    border-radius: 4px;
+    background-color: #34B3A0;
+    border: none;
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 23px;
+    padding: 5px;
+    width: 200px;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin: 5px;
+}
+
+.loginbtn span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.loginbtn span:after {
+  content: '»';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.loginbtn:hover span {
+  padding-right: 25px;
+}
+
+.loginbtn:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+#j1 {
+  float: center;
+  text-align: center;
+  top: 50px;
+  right: 0;
+  bottom: 50px;
+  left: 0;
+  margin: 0;
+  border-top: 2px solid #34B3A0;
+  border-bottom: 2px solid #34B3A0;
+}
+
+#viewCompany {
+  padding: 5em inherit;
+}
+
+#h3c1 {
+  
+  float: left;
+}
+
+.diepar {
+  text-align: center;
+}
