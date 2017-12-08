@@ -199,35 +199,32 @@
                 unset($attributes["birthyear"]);
                 $query = "EXEC REGISTER '".implode("' , '", $attributes)."', '$birthdate'";
                 $result = sqlsrv_query($conn, $query);
-                if(!$result)
+                dieIfFalse
+                (
+                    $result, 
+                    "<div class='alert alert-dismissible alert-danger'>
+                    <button type='button' class='close' data-dismiss='alert'>&times;</button>
+                    <strong>Oh snap!</strong> There was an error while signing up! </div>"
+                );
+                
+                $rows_affected = sqlsrv_rows_affected($result);            
+                if($rows_affected > 0)
+                {
+                    echo "<div class='alert alert-dismissible alert-success'>
+                    <button type='button' class='close' data-dismiss='alert'>&times;</button>
+                    <strong>Well done!</strong> You successfully signed up <a href='login.php' class='alert-link'>Click here to login</a>.
+                    </div>";
+                }
+                else
                 {
                     die
                     (
                         "<div class='alert alert-dismissible alert-danger'>
                         <button type='button' class='close' data-dismiss='alert'>&times;</button>
                         <strong>Oh snap!</strong> There was an error while signing up! </div>"
-                    );
+                    ); 
                 }
-                else
-                {
-                    $rows_affected = sqlsrv_rows_affected($result);            
-                    if($rows_affected > 0)
-                    {
-                        echo "<div class='alert alert-dismissible alert-success'>
-                        <button type='button' class='close' data-dismiss='alert'>&times;</button>
-                        <strong>Well done!</strong> You successfully signed up <a href='login.php' class='alert-link'>Click here to login</a>.
-                        </div>";
-                    }
-                    else
-                    {
-                        die
-                        (
-                            "<div class='alert alert-dismissible alert-danger'>
-                            <button type='button' class='close' data-dismiss='alert'>&times;</button>
-                            <strong>Oh snap!</strong> There was an error while signing up! </div>"
-                        ); 
-                    }
-                }
+                
                 sqlsrv_free_stmt($result);
                 sqlsrv_close( $conn );
             }
