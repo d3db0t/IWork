@@ -77,10 +77,10 @@ CREATE PROC REGISTER
       @password VARCHAR(50),
       @experience INT,
       @email VARCHAR(64),
-      @birth_date DATETIME,
       @first_name VARCHAR(50),
       @middle_name VARCHAR(50),
-      @last_name VARCHAR(50)
+      @last_name VARCHAR(50),
+      @birth_date DATETIME
 AS
       INSERT INTO Users (username, password, experience_years, email, birth_date, first_name, middle_name, last_name)
       VALUES (@username, @password, @experience, @email, @birth_date, @first_name, @middle_name, @last_name)
