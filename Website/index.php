@@ -18,7 +18,7 @@
 					<a class="nav-link" href="register.php">Register</a>
 				</li>
 				</ul>
-				<form class="form-inline my-2 my-lg-0" action="index.php" method="POST">
+				<form class="form-inline my-2 my-lg-0" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
 				<input class="form-control mr-sm-2" placeholder="Search" type="text" name="searchbar">
 				<select id="dropdownmenu" name="dropdownmenu">                      
 					<option value="0">--Search By--</option>
@@ -44,7 +44,7 @@
 			<div class="container">
 				<div class="row">
 					
-					<h3 id='h3c1'>Search Results</h3>
+					<!--<h3 id='h3c1'>Search Results</h3>-->
 					
 				</div>
 			</div>
