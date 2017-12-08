@@ -62,4 +62,21 @@
         
         return TRUE;
     }
+
+    function uniqueUsername($username, $conn)
+    {
+        $query = "SELECT * FROM Users WHERE username = '$username'";
+        $getResults = sqlsrv_query($conn, $query);  
+        if(!sqlsrv_has_rows($getResults)) return TRUE;
+        else
+        {
+            die
+            (
+                "<div class='alert alert-dismissible alert-danger'>
+                <button type='button' class='close' data-dismiss='alert'>&times;</button>
+                <strong>Oh snap!</strong> Please choose another username! </div>"
+            );
+        }    
+    }
+
 ?>
