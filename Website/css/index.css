@@ -1,4 +1,4 @@
-.loginbtn {
+.searchbtn {
     border-radius: 4px;
     background-color: #34B3A0;
     border: none;
@@ -12,14 +12,14 @@
     margin: 5px;
 }
 
-.loginbtn span {
+.searchbtn span {
   cursor: pointer;
   display: inline-block;
   position: relative;
   transition: 0.5s;
 }
 
-.loginbtn span:after {
+.searchbtn span:after {
   content: '»';
   position: absolute;
   opacity: 0;
@@ -28,11 +28,11 @@
   transition: 0.5s;
 }
 
-.loginbtn:hover span {
+.searchbtn:hover span {
   padding-right: 25px;
 }
 
-.loginbtn:hover span:after {
+.searchbtn:hover span:after {
   opacity: 1;
   right: 0;
 }
