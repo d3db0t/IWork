@@ -1,10 +1,12 @@
 <?php
     function dieIfFalse($query, $msg)
     {
-        if ($query == FALSE or !sqlsrv_has_rows($query))
-        {
-            die($msg);
-        }
+        if($query == FALSE) die($msg);
+    }
+
+    function dieIfNoRows($query, $msg)
+    {
+        if(!sqlsrv_has_rows($query)) die($msg);
     }
 
     function viewCompanyInfo($name, $address, $domain_name, $vision, $email, $field, $type)
