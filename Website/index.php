@@ -28,7 +28,7 @@
 				<h1>#1 Online Recruitment Job Site</h1>
 				<p>IWork is a simple website that provides internal systems for companies to facilitate the working process.</p>
 				<!--<a href='login.php'><button id='btn1' class='loginbtn'><span>Login</span></button></a>-->
-				<form class="form-inline my-2 my-lg-0" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
+				<form class="form-inline my-2 my-lg-0" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" id='f1'>
 				<input class="form-control mr-sm-2" placeholder="Search" type="text" name="searchbar">
 				<select id="dropdownmenu" name="dropdownmenu">                      
 					<option value="0">--Search By--</option>
