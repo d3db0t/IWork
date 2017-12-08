@@ -38,4 +38,46 @@
 		</form>
 		
         </body>
+
+        <?php
+            include('dbconfig.php');
+            include('functions.php');
+            if($conn === false) {
+                displayDBError();
+            }
+            if ($_SERVER["REQUEST_METHOD"] == "POST") 
+            {
+                $getUsername = $_POST["username"];
+                $getPassword = $_POST["password"];
+                $q = "SELECT username FROM Users WHERE dbo.Check_User_Credentials('$getUsername' , '$getPassword') = 1 AND username = '$getUsername'";
+                $getResults = sqlsrv_query($conn, $q);
+                $user = sqlsrv_fetch_array($getResults, SQLSRV_FETCH_ASSOC)['username'];
+                if (empty($getUsername) or empty($getPassword))
+                {
+                    die
+                    (
+                        "<div class='alert alert-dismissible alert-warning'>
+                        <button type='button' class='close' data-dismiss='alert'>&times;</button>
+                        <strong>Oh snap!</strong> Please fill in all fields! </div>"
+                    );
+                }
+                else if (!empty($user))
+                {
+                    session_start();
+                    $_SESSION['username'] = $getUsername;
+                    // The redirect function
+                    redirectUserByRole($_SESSION['username'], $conn);
+                }
+                else
+                {
+                    die
+                    (
+                        "<div class='alert alert-dismissible alert-danger'>
+                        <button type='button' class='close' data-dismiss='alert'>&times;</button>
+                        <strong>Oh snap!</strong> Wrong username or password!</div>"
+                    );
+                }
+                echo $_SESSION['username'];
+            }
+        ?>
 </html>
