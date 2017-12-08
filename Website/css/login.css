@@ -1,13 +1,8 @@
-#logintab {float: right;}
-#logintabc {color: #34B3A0;}
 #signinbtn {background-color: #34B3A0; 
             color: white;}
-#logo {float: left;}
 .formtitles {
     color: #34B3A0;
 }
-
-body {background-image: url('dark.jpg');}
 
 .form-signin {
     max-width: 330px;

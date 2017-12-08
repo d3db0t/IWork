@@ -26,11 +26,11 @@
 
             <form role='form' class='form-signin' action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
                 <div class="form-group">
-                    <p class='formtitles' >Enter Username</p>
+                    <p class='formtitles' >Username</p>
                     <input id="name" class="form-control" type="text" name="username" placeholder="username">
                 </div>
                 <div class="form-group">
-                    <p class='formtitles' >Enter Password</p>
+                    <p class='formtitles' >Password</p>
                     <input class="form-control" type="password" name="password" placeholder="password">
                 </div>
                 

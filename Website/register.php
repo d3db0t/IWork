@@ -1,6 +1,6 @@
 <html>
 	<link rel="stylesheet" href="css/bootstrap.min.css">
-	<link rel="stylesheet" href="css/index.css">
+	<link rel="stylesheet" href="css/register.css">
 
 	<body>
 		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -11,11 +11,14 @@
 
 			<div class="collapse navbar-collapse" id="navbarColor01">
 				<ul class="navbar-nav mr-auto">
-				<li class="nav-item active">
-					<a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
+                <li class="nav-item">
+					<a class="nav-link" href="index.php">Home</a>
 				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="register.php">Register</a>
+				<li class="nav-item active">
+					<a class="nav-link" href="register.php">Register <span class="sr-only">(current)</span></a>
+				</li>
+                <li class="nav-item">
+					<a class="nav-link" href="login.php">Login</a>
 				</li>
 				</ul>
 				<!--<form class="form-inline my-2 my-lg-0" action="index.php" method="POST" >
@@ -165,7 +168,7 @@
                     <option value="1960">1960</option>
                     <option value="1959">1959</option>
                 </select>
-                <button id='signupbtn' class="btn" type="submit" name='signup' >SignUp</button>
+                <button id='registerbtn' class="btn" type="submit" name='signup' >SignUp</button>
 		</form>
     </body>
 
