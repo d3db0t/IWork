@@ -13,6 +13,7 @@
                 $q = "EXEC CompaniesByName '$getSearchBar'";
                 $getResults = sqlsrv_query($conn, $q);
                 dieIfFalse($getResults, "<p class='diepar'>No Results are found!</p>");
+                dieIfNoRows($getResults, "<p class='diepar'>No Results are found!</p>");
                 while ($row = sqlsrv_fetch_array($getResults, SQLSRV_FETCH_ASSOC)) {
                     #echo "<h2>" . $row['name'] . "</h2>" . PHP_EOL;
                     viewCompanyInfo($row['name'], $row['address'], $row['domain_name'], $row['vision'], $row['email'], $row['field'], $row['type']);
@@ -24,6 +25,7 @@
                 $q = "EXEC CompaniesByAddress '$getSearchBar'";
                 $getResults = sqlsrv_query($conn, $q);
                 dieIfFalse($getResults, "<p class='diepar'>No Results are found!</p>");
+                dieIfNoRows($getResults, "<p class='diepar'>No Results are found!</p>");
                 while ($row = sqlsrv_fetch_array($getResults, SQLSRV_FETCH_ASSOC)) {
                     #echo "<h2>" . $row['address'] . "</h2>" . PHP_EOL;
                     viewCompanyInfo($row['name'], $row['address'], $row['domain_name'], $row['vision'], $row['email'], $row['field'], $row['type']);
@@ -35,6 +37,7 @@
                 $q = "EXEC CompaniesByType '$getSearchBar'";
                 $getResults = sqlsrv_query($conn, $q);
                 dieIfFalse($getResults, "<p class='diepar'>No Results are found!</p>");
+                dieIfNoRows($getResults, "<p class='diepar'>No Results are found!</p>");
                 while ($row = sqlsrv_fetch_array($getResults, SQLSRV_FETCH_ASSOC)) {
                     #echo "<h2>" . $row['type'] . "</h2>" . PHP_EOL;
                     viewCompanyInfo($row['name'], $row['address'], $row['domain_name'], $row['vision'], $row['email'], $row['field'], $row['type']);
