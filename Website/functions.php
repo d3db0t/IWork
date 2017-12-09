@@ -149,4 +149,41 @@
 
           echo "</div></div>";
     }
+
+    function showDepartmentInfo($companyname, $companyaddress, $depcode, $depname, $conn)
+    {
+        $depcode = '#' . $depcode;
+        $q = "EXEC DepartmentVacancies '$companyname', '$companyaddress', '$depcode'";
+        $getResults = sqlsrv_query($conn, $q);
+        dieIfFalse($getResults, "<p class='diepar'>No Results are found!</p>");
+        dieIfNoRows($getResults, "<p class='diepar'>No Results are found!</p>");
+        echo "<div id='viewCompany' class='list-group'>
+        <div class='list-group-item'>
+        <h2 class='list-group-item-heading'>$depname</h2>
+        <p class='list-group-item-text'><h5 style='color: #34B3A0'>Code: </h5>$depcode</p>
+        <p class='list-group-item-text'><h5 style='color: #34B3A0'>Address: </h5>$companyaddress</p>
+        <h3 class='list-group-item-heading'>Jobs Available:</h3>";
+        while ($row = sqlsrv_fetch_array($getResults, SQLSRV_FETCH_ASSOC))
+        {
+            echo "<h4>[Title] </h4><p class='list-group-item-text'>" . 
+            $row['title'];
+            echo "</p><p class='list-group-item-text'><h5 style='color: #34B3A0'>Short Description: </h5>" . 
+            $row['short_description'];
+            echo "</p><p class='list-group-item-text'><h5 style='color: #34B3A0'>Detailed Description: </h5>" . 
+            $row['detailed_description'];
+            echo "</p><p class='list-group-item-text'><h5 style='color: #34B3A0'>Experience Years: </h5>" . 
+            $row['experience_years'];
+            echo "</p><p class='list-group-item-text'><h5 style='color: #34B3A0'>Working Hours: </h5>" . 
+            $row['working_hours'];
+            echo "</p><p class='list-group-item-text'><h5 style='color: #34B3A0'>Salary: </h5>" . 
+            $row['salary'];
+            //echo "</p><p class='list-group-item-text'><h5 style='color: #34B3A0'>Application Deadline: </h5>" . 
+            //$row['application_deadline'];
+            echo "</p><p class='list-group-item-text'><h5 style='color: #34B3A0'>Vacancies: </h5>" . 
+            $row['vacancies'] . "</p>";
+        }
+
+        echo "</div></div>";
+    }
+
 ?>
