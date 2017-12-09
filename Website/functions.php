@@ -11,6 +11,26 @@
 
     function viewCompanyInfo($name, $address, $domain_name, $vision, $email, $field, $type)
     {
+        echo "
+            <div class='card mb-3'>
+            <h3 class='card-header'>$name</h3>
+            <div class='card-body'>
+            <h5 class='card-title'>$domain_name</h5>
+            <h6 class='card-subtitle' style='color: #34B3A0'>$email</h6>
+            </div>
+            <div class='card-body'>
+            <p class='card-text' style='color: white'>$address</p>
+            </div>
+            <ul class='list-group list-group-flush'>
+            <li class='list-group-item'>Vision: $vision</li>
+            <li class='list-group-item'>Field: $field</li>
+            <li class='list-group-item'>Type: $type</li>
+            </ul>
+            <div class='card-body'>
+            <a href='showdepartments.php?company=$name&address=$address' class='card-link'>Departments</a>
+            </div>
+        </div>";
+        /*
         echo "<div id='viewCompany' class='list-group'>
         <div class='list-group-item'>
           <a href='showdepartments.php?company=$name&address=$address' ><h2 class='list-group-item-heading'>$name</h2></a>
@@ -21,6 +41,7 @@
           <p class='list-group-item-text'><h5 style='color: #34B3A0'>Field: </h5>$field</p>
           <p class='list-group-item-text'><h5 style='color: #34B3A0'>Type: </h5>$type</p>
         </div></div>";
+        */
     }
 
     function displayDBError(){
