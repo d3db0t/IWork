@@ -12,7 +12,7 @@
     function viewCompanyInfo($name, $address, $domain_name, $vision, $email, $field, $type)
     {
         echo "
-            <div class='card mb-3'>
+            <div class='card mb-3' style='width: 21%; display: inline-block; align-items: center'>
             <h3 class='card-header'>$name</h3>
             <div class='card-body'>
             <h5 class='card-title'>$domain_name</h5>
@@ -153,7 +153,7 @@
         $getResults = sqlsrv_query($conn, $q);
         dieIfFalse($getResults, "<p class='diepar'>No Results are found!</p>");
         dieIfNoRows($getResults, "<p class='diepar'>No Results are found!</p>");
-        echo "<div id='viewCompany' class='list-group'>
+        echo "<div id='viewCompany' class='list-group' style='width: 21%; margin: auto'>
         <div class='list-group-item'>
         <h2 class='list-group-item-heading'>$companyname</h2>
         <p class='list-group-item-text'><h5 style='color: #34B3A0'>Address: </h5>$companyaddress</p>
@@ -178,7 +178,7 @@
         $getResults = sqlsrv_query($conn, $q);
         dieIfFalse($getResults, "<p class='diepar'>No Results are found!</p>");
         dieIfNoRows($getResults, "<p class='diepar'>No Results are found!</p>");
-        echo "<div id='viewCompany' class='list-group'>
+        echo "<div id='viewCompany' class='list-group' style='width: 21%; margin: auto'>
         <div class='list-group-item'>
         <h2 class='list-group-item-heading'>$depname</h2>
         <p class='list-group-item-text'><h5 style='color: #34B3A0'>Code: </h5>$depcode</p>
