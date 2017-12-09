@@ -13,7 +13,7 @@
     {
         echo "<div id='viewCompany' class='list-group'>
         <div class='list-group-item'>
-          <a href='#' ><h2 class='list-group-item-heading'>$name</h2></a>
+          <a href='showdepartments.php?company=$name&address=$address' ><h2 class='list-group-item-heading'>$name</h2></a>
           <p class='list-group-item-text'><h5 style='color: #34B3A0'>Address: </h5>$address</p>
           <p class='list-group-item-text'><h5 style='color: #34B3A0'>DomainName: </h5>$domain_name</p>
           <p class='list-group-item-text'><h5 style='color: #34B3A0'>Vision: </h5>$vision</p>
