@@ -126,4 +126,27 @@
         }
     }
 
+    function showDepartments($companyname, $companyaddress, $conn)
+    {
+        $q          = "EXEC CompanyWithDepartments '$companyname'";
+        $getResults = sqlsrv_query($conn, $q);
+        dieIfFalse($getResults, "<p class='diepar'>No Results are found!</p>");
+        dieIfNoRows($getResults, "<p class='diepar'>No Results are found!</p>");
+        echo "<div id='viewCompany' class='list-group'>
+        <div class='list-group-item'>
+        <h2 class='list-group-item-heading'>$companyname</h2>
+        <p class='list-group-item-text'><h5 style='color: #34B3A0'>Address: </h5>$companyaddress</p>
+        <h3 class='list-group-item-heading'>Departments:</h3>";
+          
+          while ($row = sqlsrv_fetch_array($getResults, SQLSRV_FETCH_ASSOC))
+          {
+              $depname = $row['name'];
+              $code = substr($row['code'], -2); 
+              echo "<h5 style='color: #34B3A0'>Name: </h5><a href='showdepartmentinfo.php?company=$companyname&address=$companyaddress&code=$code&depname=$depname'><p class='list-group-item-text'>" . 
+              $row['name'] . "</p></a><p class='list-group-item-text'><h5 style='color: #34B3A0'>Code: </h5>" . 
+              $row['code'] . "</p>";
+          }
+
+          echo "</div></div>";
+    }
 ?>
