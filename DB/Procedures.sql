@@ -208,7 +208,7 @@ AS
 
       ELSE -- IF STAFF MEMBER
       BEGIN
-            SELECT U.* FROM Users U INNER JOIN Staff_Members S ON S.username = U.username AND U.username = @username
+            SELECT U.* , S.* FROM Users U INNER JOIN Staff_Members S ON S.username = U.username AND U.username = @username
       END
 GO
 
