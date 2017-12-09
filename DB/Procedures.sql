@@ -67,6 +67,8 @@ AS
       WHERE d.code = @department_code AND d.company_name = @company 
       AND d.code = jb.department_code AND jb.vacancies > 0
       AND d.company_address = @company_address
+      AND d.company_name = jb.company_name
+      AND d.company_address = jb.company_address
 
 GO
 
