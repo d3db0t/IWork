@@ -207,4 +207,15 @@
         echo "</div></div>";
     }
 
+    function viewUserProfile($username, $conn)
+    {
+        $q = "EXEC ViewUserInfo '$username'";
+        $getResults = sqlsrv_query($conn, $q);
+        dieIfFalse($getResults, "<p class='diepar'>Error, Can not view user profile</p>");
+        dieIfNoRows($getResults, "<p class='diepar'>Error, Can not view user profile</p>");
+        $getManager = sqlsrv_fetch_array($getResults, SQLSRV_FETCH_ASSOC);
+        $username = $getManager['username'];
+        
+    }
+
 ?>
