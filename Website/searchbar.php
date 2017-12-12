@@ -39,7 +39,7 @@
 
     else
     {
-        dieIfFalse(false, "");
+        dieIfFalse(false, "<p class='diepar'>No Results are found!</p>");
     }
 
     sqlsrv_free_stmt($getResults);

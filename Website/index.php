@@ -69,7 +69,10 @@
 			dieIfFalse($getResults, "<p class='diepar'>No Results are found!</p>");
 			dieIfNoRows($getResults, "<p class='diepar'>No Results are found!</p>");
 			while ($row = sqlsrv_fetch_array($getResults, SQLSRV_FETCH_ASSOC))
-				viewCompanyInfo($row['name'], $row['address'], $row['domain_name'], $row['vision'], $row['email'], $row['field'], $row['type']);				
+				viewCompanyInfo($row['name'], $row['address'], $row['domain_name'], $row['vision'], $row['email'], $row['field'], $row['type']);	
+			
+			sqlsrv_free_stmt($getResults);
+			sqlsrv_close($conn);
 		}
 	?>
 
