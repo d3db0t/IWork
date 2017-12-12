@@ -55,7 +55,22 @@
 	</body>
 		
 	<?php
-		include('searchbar.php');
+		include('dbconfig.php');
+		include('functions.php');
+		if(!$conn)
+			displayDBError();
+		
+		if($_SERVER["REQUEST_METHOD"] == "POST")
+			include('searchbar.php');
+		else
+		{
+			$query = "EXEC AllCompanies";
+			$getResults = sqlsrv_query($conn, $query);
+			dieIfFalse($getResults, "<p class='diepar'>No Results are found!</p>");
+			dieIfNoRows($getResults, "<p class='diepar'>No Results are found!</p>");
+			while ($row = sqlsrv_fetch_array($getResults, SQLSRV_FETCH_ASSOC))
+				viewCompanyInfo($row['name'], $row['address'], $row['domain_name'], $row['vision'], $row['email'], $row['field'], $row['type']);				
+		}
 	?>
 
 </html>
