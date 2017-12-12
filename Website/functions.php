@@ -218,4 +218,25 @@
         
     }
 
+    function viewJobInfo($title, $companyname, $companyaddress, $depname, $shortdes, $detaileddes, $exp, $hrs, $salary, $vacancies)
+    {
+        echo "
+        <div class='card mb-3' style='width: 21%; display: inline-block; align-items: center'>
+        <h3 class='card-header'>$title</h3>
+        <div class='card-body'>
+        <p class='card-text' style='color: white'>$companyname</p>        
+        <p class='card-text' style='color: white'>$companyaddress</p>
+        <p class='card-text' style='color: white'>$depname</p>
+        </div>
+        <ul class='list-group list-group-flush'>
+        <li class='list-group-item'>Short Description: $shortdes</li>
+        <li class='list-group-item'>Detailed Description: $detaileddes</li>
+        <li class='list-group-item'>Experience Years: $exp</li>
+        <li class='list-group-item'>Working Hours: $hrs</li>
+        <li class='list-group-item'>Salary: $salary</li>
+        <li class='list-group-item'>Vacancies: $vacancies</li>
+        </ul>
+        </div>";
+    }
+
 ?>
