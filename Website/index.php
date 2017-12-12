@@ -69,12 +69,12 @@
 			include('searchbar.php');
 		else
 		{
-			$query = "EXEC AllCompanies";
+			$query = "EXEC Companies_with_Highest_Avg_Salaries";
 			$getResults = sqlsrv_query($conn, $query);
 			dieIfFalse($getResults, "<p class='diepar'>No Results are found!</p>");
 			dieIfNoRows($getResults, "<p class='diepar'>No Results are found!</p>");
 			while ($row = sqlsrv_fetch_array($getResults, SQLSRV_FETCH_ASSOC))
-				viewCompanyInfo($row['name'], $row['address'], $row['domain_name'], $row['vision'], $row['email'], $row['field'], $row['type']);	
+				viewCompanyWithSalary($row['name'], $row['address'], $row['domain_name'], $row['vision'], $row['email'], $row['field'], $row['type'], $row['Average Salary']);	
 			
 			sqlsrv_free_stmt($getResults);
 			sqlsrv_close($conn);
