@@ -239,4 +239,29 @@
         </div>";
     }
 
+    function viewCompanyWithSalary($name, $address, $domain_name, $vision, $email, $field, $type, $avgSalary)
+    {
+        $avgSalary = number_format($avgSalary);
+        echo "
+        <div class='card mb-3' style='width: 21%; display: inline-block; align-items: center'>
+        <h3 class='card-header'>$name</h3>
+        <div class='card-body'>
+        <h5 class='card-title'>$domain_name</h5>
+        <h6 class='card-subtitle' style='color: #34B3A0'>$email</h6>
+        </div>
+        <div class='card-body'>
+        <p class='card-text' style='color: white'>$address</p>
+        </div>
+        <ul class='list-group list-group-flush'>
+        <li class='list-group-item'>Vision: $vision</li>
+        <li class='list-group-item'>Field: $field</li>
+        <li class='list-group-item'>Type: $type</li>
+        <li class='list-group-item'>Average Salaries: $avgSalary </li>
+        </ul>
+        <div class='card-body'>
+        <a href='showdepartments.php?company=$name&address=$address' class='card-link'>Departments</a>
+        </div>
+    </div>"; 
+    }
+
 ?>
