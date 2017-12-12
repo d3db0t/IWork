@@ -30,6 +30,11 @@
 				<!--<a href='login.php'><button id='btn1' class='loginbtn'><span>Login</span></button></a>-->
 				<form class="form-inline my-2 my-lg-0" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" id='f1'>
 				<input class="form-control mr-sm-2" placeholder="Search" type="text" name="searchbar">
+				<select id="jobsORcompanies" name="jobsORcompanies">                      
+					<option value="0">--Search For--</option>
+					<option value="1">company</option>
+					<option value="2">job</option>
+				</select>
 				<select id="dropdownmenu" name="dropdownmenu">                      
 					<option value="0">--Search By--</option>
 					<option value="1">name</option>
