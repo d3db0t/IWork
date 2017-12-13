@@ -215,6 +215,15 @@
         $checkIfStaffMember = sqlsrv_query($conn, $q2);
         dieIfFalse($getUserInfo, "<p class='diepar'>Error, Can not view user profile</p>");
         dieIfNoRows($getUserInfo, "<p class='diepar'>Error, Can not view user profile</p>");
+        $ifJobSeeker        = "SELECT username FROM Users WHERE dbo.Check_User_Role('$username') = 'JobSeeker' AND username = '$username'";
+        $ifRegularEmployee  = "SELECT username FROM Users WHERE dbo.Check_User_Role('$username') = 'RegularEmployee' AND username = '$username'";
+        $ifManager          = "SELECT username FROM Users WHERE dbo.Check_User_Role('$username') = 'Manager' AND username = '$username'";
+        $getJobSeeker       = sqlsrv_query($conn, $ifJobSeeker);
+        $getRegularEmployee = sqlsrv_query($conn, $ifRegularEmployee);
+        $getManager         = sqlsrv_query($conn, $ifManager);
+        $jobSeeker          = sqlsrv_fetch_array($getJobSeeker, SQLSRV_FETCH_ASSOC)['username'];
+        $regularEmployee    = sqlsrv_fetch_array($getRegularEmployee, SQLSRV_FETCH_ASSOC)['username'];
+        $manager            = sqlsrv_fetch_array($getManager, SQLSRV_FETCH_ASSOC)['username'];
         if (isset($checkIfStaffMember)) // StaffMember
         {
             while ($row = sqlsrv_fetch_array($getUserInfo, SQLSRV_FETCH_ASSOC))
@@ -258,10 +267,20 @@
                 <li class='list-group-item'>Experience Years: $experience_years</li>
                 <li class='list-group-item'>Age: $age</li>
                 </ul>
-                <div class='card-body'>
-                <a href='editprofile.php' class='card-link'>Edit Profile</a>
-                </div>
-                </div>";
+                <div class='card-body'>";
+                if (!empty(manager))
+                {
+                    echo "<a href='editmprofile.php' class='card-link'>Edit Profile</a>";
+                }
+                else if (!empty(regularEmployee))
+                {
+                    echo "<a href='editreprofile.php' class='card-link'>Edit Profile</a>";
+                }
+                else if(!empty(jobSeeker))
+                {
+                    echo "<a href='editjsprofile.php' class='card-link'>Edit Profile</a>";
+                }
+                echo"</div></div>";
             }
         }
         else // JobSeeker only
