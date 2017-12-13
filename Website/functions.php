@@ -131,15 +131,15 @@
         $manager            = sqlsrv_fetch_array($getManager, SQLSRV_FETCH_ASSOC)['username'];
         if (!empty($jobSeeker))
         {
-            header("Location: jsprofile.php");
+            header("Location: jshome.php");
         }
         else if (!empty($regularEmployee))
         {
-            header("Location: reprofile.php");
+            header("Location: rehome.php");
         }
         else if (!empty($manager))
         {
-            header("Location: mprofile.php");
+            header("Location: mhome.php");
         }
         else
         {
