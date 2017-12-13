@@ -27,7 +27,7 @@
             <li class='list-group-item'>Type: $type</li>
             </ul>
             <div class='card-body'>
-            <a href='showdepartments.php?company=$name&address=$address' class='card-link'>Departments</a>
+            <a href='showdepartments.php?company=$name&address=$address' class='card-link'><button type='submit' class='btn btn-success' style='background: #34B3A0; border-color: #34B3A0' >Departments</button></a>
             </div>
         </div>";
         /*
@@ -218,8 +218,9 @@
         
     }
 
-    function viewJobInfo($title, $companyname, $companyaddress, $depname, $shortdes, $detaileddes, $exp, $hrs, $salary, $vacancies)
+    function viewJobInfo($title, $companyname, $companyaddress, $depname, $code, $shortdes, $detaileddes, $exp, $hrs, $salary, $vacancies)
     {
+        $code = substr($code, -2);         
         echo "
         <div class='card mb-3' style='width: 21%; display: inline-block; align-items: center'>
         <h3 class='card-header'>$title</h3>
@@ -236,6 +237,9 @@
         <li class='list-group-item'>Salary: $salary</li>
         <li class='list-group-item'>Vacancies: $vacancies</li>
         </ul>
+        <div class='card-body'>
+        <a href='questions.php?jobtitle=$title&companyname=$companyname&companyaddress=$companyaddress&dep=$code' class='card-link' ><button type='submit' class='btn btn-success' style='background: #34B3A0; border-color: #34B3A0' >Apply</button></a>
+        </div>
         </div>";
     }
 

@@ -50,7 +50,7 @@
         dieIfFalse($getResults, "<p class='diepar'>No Results are found!</p>");
         dieIfNoRows($getResults, "<p class='diepar'>No Results are found!</p>");
         while ($row = sqlsrv_fetch_array($getResults, SQLSRV_FETCH_ASSOC))
-            viewJobInfo($row["title"], $row["company_name"], $row["company_address"], $row["name"], $row["short_description"], $row["detailed_description"], $row["experience_years"], $row["working_hours"], $row["salary"], $row["vacancies"]);        
+            viewJobInfo($row["title"], $row["company_name"], $row["company_address"], $row["name"], $row["department_code"], $row["short_description"], $row["detailed_description"], $row["experience_years"], $row["working_hours"], $row["salary"], $row["vacancies"]);        
     }
     else
         dieIfFalse(false, "<p class='diepar'>No Results are found!</p>");
