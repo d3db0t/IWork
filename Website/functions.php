@@ -345,4 +345,33 @@
     </div>"; 
     }
 
+    function editUserProfile($username, $conn)
+    {
+        $phpself = $_SERVER['PHP_SELF'];
+        echo "<form role='form' class='form-signin' action='$phpself' method='POST'>
+            <div class='form-group'>
+                <p class='formtitles' >Password</p>
+                <input class='form-control' type='text' name='password' placeholder='password'>
+            </div>
+            <div class='form-group'>
+                <p class='formtitles' >Experience Years</p>
+                <input id='exyears' class='form-control' type='text' name='experience_years' placeholder='experience years'>
+            </div>
+            <div class='form-group'>
+                <p class='formtitles' >First Name</p>
+                <input id='firstname' class='form-control' type='text' name='first_name' placeholder='first name'>
+            </div>
+            <div class='form-group'>
+                <p class='formtitles' >Middle Name</p>
+                <input id='middlename' class='form-control' type='text' name='middle_name' placeholder='middle name'>
+            </div>
+            <div class='form-group'>
+                <p class='formtitles' >Last Name</p>
+                <input id='lastname' class='form-control' type='text' name='last_name' placeholder='last name'>
+            </div>
+        
+            <button id='editbtn' class='btn' type='submit' name='edit' >Save</button>
+        </form>";
+    }
+
 ?>
