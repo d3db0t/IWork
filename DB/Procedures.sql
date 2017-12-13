@@ -216,22 +216,16 @@ GO
 --EDIT ALL THE USER INFO
 CREATE PROC EditUserInfo
       @username VARCHAR(50),
-      @newusername VARCHAR(50) = @username,
       @password VARCHAR(50),
       @experience_years INT,
-      @email VARCHAR(64),
-      @birth_date DATETIME,
       @first_name VARCHAR(50),
       @middle_name VARCHAR(50),
       @last_name VARCHAR(50)
 AS
       UPDATE Users
-      SET 
-      username         = @newusername,
+      SET
       password         = @password,
       experience_years = @experience_years,
-      email            = @email,
-      birth_date       = @birth_date,
       first_name       = @first_name,
       middle_name      = @middle_name,
       last_name        = @last_name
