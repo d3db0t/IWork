@@ -89,8 +89,8 @@
     function uniqueUsername($username, $conn)
     {
         $query = "SELECT * FROM Users WHERE username = '$username'";
-        $getResults = sqlsrv_query($conn, $query);  
-        if(!sqlsrv_has_rows($getResults)) return TRUE;
+        $getUserInfo = sqlsrv_query($conn, $query);  
+        if(!sqlsrv_has_rows($getUserInfo)) return TRUE;
         else
         {
             die
@@ -105,8 +105,8 @@
     function uniqueEmail($email, $conn)
     {
         $query = "SELECT * FROM Users WHERE email = '$email'";
-        $getResults = sqlsrv_query($conn, $query);  
-        if(!sqlsrv_has_rows($getResults)) return TRUE;
+        $getUserInfo = sqlsrv_query($conn, $query);  
+        if(!sqlsrv_has_rows($getUserInfo)) return TRUE;
         else
         {
             die
@@ -150,16 +150,16 @@
     function showDepartments($companyname, $companyaddress, $conn)
     {
         $q          = "EXEC CompanyWithDepartments '$companyname'";
-        $getResults = sqlsrv_query($conn, $q);
-        dieIfFalse($getResults, "<p class='diepar'>No Results are found!</p>");
-        dieIfNoRows($getResults, "<p class='diepar'>No Results are found!</p>");
+        $getUserInfo = sqlsrv_query($conn, $q);
+        dieIfFalse($getUserInfo, "<p class='diepar'>No Results are found!</p>");
+        dieIfNoRows($getUserInfo, "<p class='diepar'>No Results are found!</p>");
         echo "<div id='viewCompany' class='list-group' style='width: 21%; margin: auto'>
         <div class='list-group-item'>
         <h2 class='list-group-item-heading'>$companyname</h2>
         <p class='list-group-item-text'><h5 style='color: #34B3A0'>Address: </h5>$companyaddress</p>
         <h3 class='list-group-item-heading'>Departments:</h3>";
           
-          while ($row = sqlsrv_fetch_array($getResults, SQLSRV_FETCH_ASSOC))
+          while ($row = sqlsrv_fetch_array($getUserInfo, SQLSRV_FETCH_ASSOC))
           {
               $depname = $row['name'];
               $code = substr($row['code'], -2); 
@@ -175,16 +175,16 @@
     {
         $depcode = '#' . $depcode;
         $q = "EXEC DepartmentVacancies '$companyname', '$companyaddress', '$depcode'";
-        $getResults = sqlsrv_query($conn, $q);
-        dieIfFalse($getResults, "<p class='diepar'>No Results are found!</p>");
-        dieIfNoRows($getResults, "<p class='diepar'>No Results are found!</p>");
+        $getUserInfo = sqlsrv_query($conn, $q);
+        dieIfFalse($getUserInfo, "<p class='diepar'>No Results are found!</p>");
+        dieIfNoRows($getUserInfo, "<p class='diepar'>No Results are found!</p>");
         echo "<div id='viewCompany' class='list-group' style='width: 21%; margin: auto'>
         <div class='list-group-item'>
         <h2 class='list-group-item-heading'>$depname</h2>
         <p class='list-group-item-text'><h5 style='color: #34B3A0'>Code: </h5>$depcode</p>
         <p class='list-group-item-text'><h5 style='color: #34B3A0'>Address: </h5>$companyaddress</p>
         <h3 class='list-group-item-heading'>Jobs Available:</h3>";
-        while ($row = sqlsrv_fetch_array($getResults, SQLSRV_FETCH_ASSOC))
+        while ($row = sqlsrv_fetch_array($getUserInfo, SQLSRV_FETCH_ASSOC))
         {
             echo "<h4>[Title] </h4><p class='list-group-item-text'>" . 
             $row['title'];
@@ -210,11 +210,92 @@
     function viewUserProfile($username, $conn)
     {
         $q = "EXEC ViewUserInfo '$username'";
-        $getResults = sqlsrv_query($conn, $q);
-        dieIfFalse($getResults, "<p class='diepar'>Error, Can not view user profile</p>");
-        dieIfNoRows($getResults, "<p class='diepar'>Error, Can not view user profile</p>");
-        $getManager = sqlsrv_fetch_array($getResults, SQLSRV_FETCH_ASSOC);
-        $username = $getManager['username'];
+        $q2 = "SELECT username FROM StaffMembers WHERE username = '$username'";
+        $getUserInfo = sqlsrv_query($conn, $q);
+        $checkIfStaffMember = sqlsrv_query($conn, $q2);
+        dieIfFalse($getUserInfo, "<p class='diepar'>Error, Can not view user profile</p>");
+        dieIfNoRows($getUserInfo, "<p class='diepar'>Error, Can not view user profile</p>");
+        if (isset($checkIfStaffMember)) // StaffMember
+        {
+            while ($row = sqlsrv_fetch_array($getUserInfo, SQLSRV_FETCH_ASSOC))
+            {
+                $experience_years    = $row['experience_years'];
+                $email               = $row['email'];
+                $birth_date          = $row['birth_date'];
+                $first_name          = $row['first_name'];
+                $middle_name         = $row['middle_name'];
+                $last_name           = $row['last_name'];
+                $age                 = $row['age'];
+                // StaffMember attributes
+                $salary              = $row['salary'];
+                $annual_leaves       = $row['annual_leaves'];
+                $day_off             = $row['day_off'];
+                $staff_company_email = $row['staff_company_email'];
+                $company_name        = $row['company_name'];
+                $company_address     = $row['company_address'];
+                $department_code     = $row['department_code'];
+                $job_title           = $row['job_title'];
+                echo "
+                <div class='card mb-3' style='width: 21%; margin: auto'>
+                <h3 class='card-header'>$username</h3>
+                <div class='card-body'>
+                <h5 class='card-title'>$job_title</h5>
+                <h6 class='card-subtitle' style='color: #34B3A0'>$staff_company_email</h6>
+                </div>
+                <div class='card-body'>
+                <p class='card-text' style='color: white'>$email</p>
+                </div>
+                <ul class='list-group list-group-flush'>
+                <li class='list-group-item'>First Name: $first_name</li>
+                <li class='list-group-item'>Middle Name: $middle_name</li>
+                <li class='list-group-item'>Personal Email: $email</li>
+                <li class='list-group-item'>Company Name: $company_name</li>
+                <li class='list-group-item'>Company Address: $company_address</li>
+                <li class='list-group-item'>Department Code: $department_code</li>
+                <li class='list-group-item'>Salary: $salary</li>
+                <li class='list-group-item'>Day Off: $day_off</li>
+                <li class='list-group-item'>Annual Leaves: $annual_leaves</li>
+                <li class='list-group-item'>Experience Years: $experience_years</li>
+                <li class='list-group-item'>Age: $age</li>
+                </ul>
+                <div class='card-body'>
+                <a href='editprofile.php' class='card-link'>Edit Profile</a>
+                </div>
+                </div>";
+            }
+        }
+        else // JobSeeker only
+        {
+            while ($row = sqlsrv_fetch_array($getUserInfo, SQLSRV_FETCH_ASSOC))
+            {
+                $experience_years = $row['experience_years'];
+                $email            = $row['email'];
+                $birth_date       = $row['birth_date'];
+                $first_name       = $row['first_name'];
+                $middle_name      = $row['middle_name'];
+                $last_name        = $row['last_name'];
+                $age              = $row['age'];
+                echo "
+                <div class='card mb-3' style='width: 21%; display: inline-block; align-items: center'>
+                <h3 class='card-header'>$username</h3>
+                <div class='card-body'>
+                <h5 class='card-title'>$email</h5>
+                <h6 class='card-subtitle' style='color: #34B3A0'>ExperienceYears: $experience_years</h6>
+                </div>
+                <div class='card-body'>
+                <p class='card-text' style='color: white'>Birthdate: $birth_date</p>
+                </div>
+                <ul class='list-group list-group-flush'>
+                <li class='list-group-item'>First Name: $first_name</li>
+                <li class='list-group-item'>Middle Name: $middle_name</li>
+                <li class='list-group-item'>Last Name: $last_name</li>
+                </ul>
+                <div class='card-body'>
+                <a href='editprofile.php' class='card-link'>Edit Profile</a>
+                </div>
+                </div>";
+            }
+        }
         
     }
 
