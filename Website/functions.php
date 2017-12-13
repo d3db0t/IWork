@@ -220,27 +220,54 @@
 
     function viewJobInfo($title, $companyname, $companyaddress, $depname, $code, $shortdes, $detaileddes, $exp, $hrs, $salary, $vacancies)
     {
-        $code = substr($code, -2);         
-        echo "
-        <div class='card mb-3' style='width: 21%; display: inline-block; align-items: center'>
-        <h3 class='card-header'>$title</h3>
-        <div class='card-body'>
-        <p class='card-text' style='color: white'>$companyname</p>        
-        <p class='card-text' style='color: white'>$companyaddress</p>
-        <p class='card-text' style='color: white'>$depname</p>
-        </div>
-        <ul class='list-group list-group-flush'>
-        <li class='list-group-item'>Short Description: $shortdes</li>
-        <li class='list-group-item'>Detailed Description: $detaileddes</li>
-        <li class='list-group-item'>Experience Years: $exp</li>
-        <li class='list-group-item'>Working Hours: $hrs</li>
-        <li class='list-group-item'>Salary: $salary</li>
-        <li class='list-group-item'>Vacancies: $vacancies</li>
-        </ul>
-        <div class='card-body'>
-        <a href='questions.php?jobtitle=$title&companyname=$companyname&companyaddress=$companyaddress&dep=$code' class='card-link' ><button type='submit' class='btn btn-success' style='background: #34B3A0; border-color: #34B3A0' >Apply</button></a>
-        </div>
-        </div>";
+        if(isset($_SESSION["username"]))
+        {
+            $code = substr($code, -2);         
+            echo "
+            <div class='card mb-3' style='width: 21%; display: inline-block; align-items: center'>
+            <h3 class='card-header'>$title</h3>
+            <div class='card-body'>
+            <p class='card-text' style='color: white'>$companyname</p>        
+            <p class='card-text' style='color: white'>$companyaddress</p>
+            <p class='card-text' style='color: white'>$depname</p>
+            </div>
+            <ul class='list-group list-group-flush'>
+            <li class='list-group-item'>Short Description: $shortdes</li>
+            <li class='list-group-item'>Detailed Description: $detaileddes</li>
+            <li class='list-group-item'>Experience Years: $exp</li>
+            <li class='list-group-item'>Working Hours: $hrs</li>
+            <li class='list-group-item'>Salary: $salary</li>
+            <li class='list-group-item'>Vacancies: $vacancies</li>
+            </ul>
+            <div class='card-body'>
+            <a href='questions.php?jobtitle=$title&companyname=$companyname&companyaddress=$companyaddress&dep=$code' class='card-link' ><button type='submit' class='btn btn-success' style='background: #34B3A0; border-color: #34B3A0' >Apply</button></a>
+            </div>
+            </div>";
+        }
+        else
+        {
+            $code = substr($code, -2);         
+            echo "
+            <div class='card mb-3' style='width: 21%; display: inline-block; align-items: center'>
+            <h3 class='card-header'>$title</h3>
+            <div class='card-body'>
+            <p class='card-text' style='color: white'>$companyname</p>        
+            <p class='card-text' style='color: white'>$companyaddress</p>
+            <p class='card-text' style='color: white'>$depname</p>
+            </div>
+            <ul class='list-group list-group-flush'>
+            <li class='list-group-item'>Short Description: $shortdes</li>
+            <li class='list-group-item'>Detailed Description: $detaileddes</li>
+            <li class='list-group-item'>Experience Years: $exp</li>
+            <li class='list-group-item'>Working Hours: $hrs</li>
+            <li class='list-group-item'>Salary: $salary</li>
+            <li class='list-group-item'>Vacancies: $vacancies</li>
+            </ul>
+            <div class='card-body'>
+            <a href='login.php' class='card-link' ><button type='submit' class='btn btn-success' style='background: #34B3A0; border-color: #34B3A0' >Apply</button></a>
+            </div>
+            </div>";
+        }
     }
 
     function viewCompanyWithSalary($name, $address, $domain_name, $vision, $email, $field, $type, $avgSalary)
@@ -263,7 +290,7 @@
         <li class='list-group-item'>Average Salaries: $avgSalary </li>
         </ul>
         <div class='card-body'>
-        <a href='showdepartments.php?company=$name&address=$address' class='card-link'>Departments</a>
+        <a href='showdepartments.php?company=$name&address=$address' class='card-link'><button type='submit' class='btn btn-success' style='background: #34B3A0; border-color: #34B3A0' >Departments</button></a>
         </div>
     </div>"; 
     }
