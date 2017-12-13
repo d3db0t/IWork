@@ -257,6 +257,7 @@
                 <ul class='list-group list-group-flush'>
                 <li class='list-group-item'>First Name: $first_name</li>
                 <li class='list-group-item'>Middle Name: $middle_name</li>
+                <li class='list-group-item'>Last Name: $last_name</li>
                 <li class='list-group-item'>Personal Email: $email</li>
                 <li class='list-group-item'>Company Name: $company_name</li>
                 <li class='list-group-item'>Company Address: $company_address</li>
