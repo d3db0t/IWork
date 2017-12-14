@@ -770,7 +770,7 @@ GO
 CREATE PROC CheckIn
        @username VARCHAR(50)
 AS
-    IF(DATEPART(DW,CURRENT_TIMESTAMP) != 6 OR DATEPART(DW,CURRENT_TIMESTAMP) != dbo.DayOff(@username))
+    IF(DATEPART(DW,CURRENT_TIMESTAMP) != 6 AND DATEPART(DW,CURRENT_TIMESTAMP) != dbo.DayOff(@username))
     BEGIN
        INSERT INTO Attendance(username, date, start_time)
        VALUES (@username, DATEADD(DD,0,DATEDIFF(DD,0,CURRENT_TIMESTAMP)),CURRENT_TIMESTAMP)
@@ -782,7 +782,7 @@ GO
 CREATE PROC CheckOut
        @username VARCHAR(50)
 AS
-    IF(DATEPART(DW,CURRENT_TIMESTAMP) != 6 OR DATEPART(DW,CURRENT_TIMESTAMP) != dbo.DayOff(@username))
+    IF(DATEPART(DW,CURRENT_TIMESTAMP) != 6 AND DATEPART(DW,CURRENT_TIMESTAMP) != dbo.DayOff(@username))
     BEGIN
        UPDATE Attendance
        SET end_time = CURRENT_TIMESTAMP
@@ -797,7 +797,7 @@ CREATE PROC ViewAttendanceRecords
        @start_date DATE,
        @end_date DATE
 AS
-       SELECT A.start_time , A.end_time , 
+       SELECT A.date, A.start_time , A.end_time , 
               DATEDIFF(HH, A.start_time, A.end_time) AS 'duration',
               dbo.GetMissingHours(Jb.working_hours, A.start_time, A.end_time) AS 'missing_hours'
        FROM   Attendance A , Jobs_Available Jb, Staff_Members S
@@ -1058,7 +1058,7 @@ GO
 CREATE PROC ViewRecievedEmails
        @user_email VARCHAR(64)
 AS
-       SELECT E.sender_email , Er.recepient_email, E.subject, E.body
+       SELECT E.* , Er.recepient_email
        FROM Emails E, Emails_Recepients Er
        WHERE E.id = Er.id AND Er.recepient_email = @user_email  
 

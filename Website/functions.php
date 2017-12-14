@@ -653,4 +653,11 @@
         }
     }
         
+    function getUserMail($conn, $username)
+    {
+        $usermail = "SELECT * FROM Staff_Members WHERE username = '$username'";
+        $getResults = sqlsrv_query($conn, $usermail);
+        return sqlsrv_fetch_array($getResults, SQLSRV_FETCH_ASSOC)["staff_company_email"];
+    }
+
 ?>

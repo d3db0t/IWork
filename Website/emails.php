@@ -12,7 +12,7 @@
 
 			<div class="collapse navbar-collapse" id="navbarColor01">
 				<ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
+                    <li class="nav-item">
                         <a class="nav-link" href="sportalhome.php">Portal Home<span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
@@ -21,7 +21,7 @@
                     <li class="nav-item">
                         <a class="nav-link" href="attendance.php">Attendance</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item active">
                         <a class="nav-link" href="emails.php">Emails</a>
                     </li>
                     <li class="nav-item">
@@ -41,23 +41,38 @@
         include('dbconfig.php');
         include('functions.php');
         if(!$conn) displayDBError();
-
-        $username = $_SESSION['username'];
-        $query = "EXEC ViewAnnouncements '$username'";
-        $getResults = sqlsrv_query($conn, $query);
-        echo "<h1 style='color: #34B3A0'>Announcements</h1>";
-        dieIfFalse($getResults, "<p class='diepar'>No recent announcements are found!</p>");
-        dieIfNoRows($getResults, "<p class='diepar'>No recent announcements are found!</p>");
         
+
+        $username = $_SESSION["username"];
+        $mail = getUserMail($conn, $username);
+        
+        $query = "EXEC ViewRecievedEmails '$mail'";
+        $getResults = sqlsrv_query($conn, $query);
+        echo "<h1 style='color: #34B3A0'>Emails</h1>";
+       // dieIfFalse($getResults, "<p class='diepar'>No emails are found!</p>");
+       // dieIfNoRows($getResults, "<p class='diepar'>No emails are found!</p>");
         while($row = sqlsrv_fetch_array($getResults, SQLSRV_FETCH_ASSOC))
         {
-            $title = $row['title'];
-            $description = $row['description'];
-            echo "<div class='jumbotron'>
-                <h1 class='display-3'>$title</h1>
-                <p class='lead'>$description</p>
-                <hr class='my-4'>
-                </div>";
+            $sender = $row["sender_email"];
+            $reciever = $row["recepient_email"];
+            $subject = $row["subject"];
+            $body = $row["body"];
+            $code = $row["id"];
+            echo "<div class='card mb-3' style='width: 21%; display: inline-block; align-items: center'>
+            <h3 class='card-header'>$subject</h3>
+            <ul class='list-group list-group-flush'>
+            <li class='list-group-item'>From: $sender</li>
+            <li class='list-group-item'>To: $reciever</li>
+            </ul>
+            <div class='card-body'>
+            <p class='card-text' style='color: white'>$body</p>
+            </div>     
+            <div class='card-body'>
+            <a href='reply.php?code=$code' class='card-link'><button type='submit' class='btn btn-success' style='background: #34B3A0; border-color: #34B3A0' >Reply</button></a>
+            </div>
+            </div>";
         }
+        echo"
+        <a href='sendemail.php' class='card-link'><button type='submit' class='btn btn-success' style='background: #34B3A0; border-color: #34B3A0' >Send Mail</button></a>";
     ?>
 </html>
