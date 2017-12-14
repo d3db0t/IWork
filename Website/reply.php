@@ -49,12 +49,13 @@
     </body>
 
     <?php
+        $code = $_GET["code"];      
+            
         include('dbconfig.php');
         include('functions.php');
         if(!$conn)
             displayDBError();
         
-        $code = $_GET["code"];      
         if($_SERVER["REQUEST_METHOD"] == "POST")
         {
             $attributes = array(
@@ -65,8 +66,8 @@
             {
                 $subject = $_POST["subject"];
                 $body = $_POST["body"];
-                $query = "EXEC EmailReply '$code', '$subject', '$body";
-                $getResults = sqlsqrv_query($conn, $query);
+                $query = "EXEC EmailReply '$code', '$subject', '$body'";
+                $getResults = sqlsrv_query($conn, $query);
                 if(sqlsrv_rows_affected($getResults) > 0)
                     echo "echo <div class='alert alert-dismissible alert-success'>
                     <button type='button' class='close' data-dismiss='alert'>&times;</button>
