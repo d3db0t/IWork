@@ -319,7 +319,7 @@ CREATE PROC ViewInterviewQuestions
 AS
       if (dbo.Applied_Before(@username, @job_title, @company_name, @company_address, @department_code) = 1)
       BEGIN
-            SELECT question FROM Interview_Questions 
+            SELECT * FROM Interview_Questions 
             WHERE title         = @job_title 
             AND company_name    = @company_name 
             AND company_address = @company_address 
