@@ -73,9 +73,10 @@ CREATE TABLE Staff_Members(
 )
 
 --CHECK EMAIL OR USERNAME
+
 CREATE TABLE Emails(
     id INT IDENTITY,
-    sender_email VARCHAR(64) UNIQUE NOT NULL,
+    sender_email VARCHAR(64) NOT NULL,
     time_stamp TIMESTAMP NOT NULL,
     subject VARCHAR(50),
     body VARCHAR(500),
@@ -88,7 +89,7 @@ CREATE TABLE Emails_Recepients(
     sender_email VARCHAR(64) NOT NULL,
     recepient_email VARCHAR(64) NOT NULL,
     PRIMARY KEY(id , recepient_email),
-    FOREIGN KEY(sender_email) REFERENCES Emails(sender_email) ON DELETE NO ACTION ON UPDATE NO ACTION,
+    FOREIGN KEY(sender_email) REFERENCES Staff_Members(staff_company_email) ON DELETE NO ACTION ON UPDATE NO ACTION,
     FOREIGN KEY(recepient_email) REFERENCES Staff_Members(staff_company_email) ON DELETE NO ACTION ON UPDATE NO ACTION
 )
 
