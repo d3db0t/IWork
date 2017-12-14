@@ -797,7 +797,7 @@ CREATE PROC ViewAttendanceRecords
        @start_date DATE,
        @end_date DATE
 AS
-       SELECT A.start_time , A.end_time , 
+       SELECT A.date, A.start_time , A.end_time , 
               DATEDIFF(HH, A.start_time, A.end_time) AS 'duration',
               dbo.GetMissingHours(Jb.working_hours, A.start_time, A.end_time) AS 'missing_hours'
        FROM   Attendance A , Jobs_Available Jb, Staff_Members S
