@@ -14,6 +14,15 @@
 				<ul class="navbar-nav mr-auto">
 				<li class="nav-item active">
 					<a class="nav-link" href="mhome.php">Home <span class="sr-only">(current)</span></a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="mprofile.php">Profile</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="">Requests</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="">Applications<span class="badge badge-success badge-pill" style='background-color: #34B3A0;color: white'>14</span></a>
 				</li>               
 				</ul>
                 <ul class="navbar-nav ml-auto">
