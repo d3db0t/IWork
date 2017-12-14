@@ -1,4 +1,7 @@
-<?php session_start();?>
+<?php 
+	session_start();
+	include('mnavbarcounts.php');
+?>
 <html>
 	<link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/editprofile.css">
@@ -12,15 +15,17 @@
 
 			<div class="collapse navbar-collapse" id="navbarColor01">
 				<ul class="navbar-nav mr-auto">
+				<li class="nav-item">
+					<a class="nav-link" href="mhome.php">Home</a>
+				</li>
 				<li class="nav-item active">
 					<a class="nav-link" href="mprofile.php">Profile <span class="sr-only">(current)</span></a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="staffrequests.php">StaffRequests</a>
+				<a class="nav-link" href="staffrequests.php">StaffRequests<span class="badge badge-success badge-pill" style='background-color: #34B3A0;color: white'><?php echo $staffRequestsCount ?></span></a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="">Applications<span class="badge badge-success badge-pill" style='background-color: #34B3A0;color: white'>14</span></a>
-                    
+					<a class="nav-link" href="jobapplications.php">JobApplications<span class="badge badge-success badge-pill" style='background-color: #34B3A0;color: white'><?php echo $jobApplicationsCount ?></span></a>
 				</li>
 				</ul>
                 <ul class="navbar-nav ml-auto">

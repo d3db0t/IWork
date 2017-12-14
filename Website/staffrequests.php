@@ -24,7 +24,7 @@
                     <a class="nav-link" href="staffrequests.php">StaffRequests <span class="sr-only">(current)</span><span class="badge badge-success badge-pill" style='background-color: #34B3A0;color: white'><?php echo $staffRequestsCount ?></span></a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="">Applications<span class="badge badge-success badge-pill" style='background-color: #34B3A0;color: white'>14</span></a>
+				<a class="nav-link" href="jobapplications.php">JobApplications<span class="badge badge-success badge-pill" style='background-color: #34B3A0;color: white'><?php echo $jobApplicationsCount ?></span></a>
 				</li>
 				</ul>
                 <ul class="navbar-nav ml-auto">
