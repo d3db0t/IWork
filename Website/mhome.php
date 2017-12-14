@@ -41,6 +41,9 @@
 				</li>
 				<li class="nav-item">
                     <a class="nav-link" href="assignemployeetotask.php">AssignEmployeeToTask</a>
+				</li>
+				<li class="nav-item">
+                    <a class="nav-link" href="changeassignedemployee.php">ChangeAssignedEmployee</a>
                 </li>               
 				</ul>
                 <ul class="navbar-nav ml-auto">

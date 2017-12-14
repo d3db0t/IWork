@@ -42,6 +42,9 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="assignemployeetotask.php">AssignEmployeeToTask <span class="sr-only">(current)</span></a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="changeassignedemployee.php">ChangeAssignedEmployee</a>
+                </li>
 				</ul>
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
@@ -74,7 +77,8 @@
                 $employeeusername = $_POST['employeeusername'];
                 $q                = "EXEC AssignEmployeeToTask '$manager', '$employeeusername', '$taskname'";
                 $getResults       = sqlsrv_query($conn, $q);
-                if (isset($getResults))
+                $rows_affected = sqlsrv_rows_affected($getResults);
+                if ($rows_affected > 0)
                 {
                     echo "<div class='alert alert-dismissible alert-success'>
                     <button type='button' class='close' data-dismiss='alert'>&times;</button>
