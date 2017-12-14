@@ -16,7 +16,7 @@
 					<a class="nav-link" href="mprofile.php">Profile <span class="sr-only">(current)</span></a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="">Requests</a>
+					<a class="nav-link" href="staffrequests.php">StaffRequests</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="">Applications<span class="badge badge-success badge-pill" style='background-color: #34B3A0;color: white'>14</span></a>

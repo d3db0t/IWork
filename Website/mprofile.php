@@ -1,4 +1,7 @@
-<?php session_start();?>
+<?php
+	session_start();
+	include('mnavbarcounts.php');
+?>
 <html>
 	<link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/mprofile.css">
@@ -19,7 +22,7 @@
 					<a class="nav-link" href="mprofile.php">Profile <span class="sr-only">(current)</span></a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="">Requests</a>
+				<a class="nav-link" href="staffrequests.php">StaffRequests<span class="badge badge-success badge-pill" style='background-color: #34B3A0;color: white'><?php echo $staffRequestsCount ?></span></a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="">Applications<span class="badge badge-success badge-pill" style='background-color: #34B3A0;color: white'>14</span></a>
