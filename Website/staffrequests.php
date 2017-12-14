@@ -26,6 +26,9 @@
 				<li class="nav-item">
 				<a class="nav-link" href="jobapplications.php">JobApplications<span class="badge badge-success badge-pill" style='background-color: #34B3A0;color: white'><?php echo $jobApplicationsCount ?></span></a>
 				</li>
+				<li class="nav-item">
+                    <a class="nav-link" href="createproject.php">CreateProject</a>
+                </li>
 				</ul>
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
