@@ -425,4 +425,91 @@
         </form>";
     }
 
+    function ViewEmployeesRequests($username, $conn)
+    {
+        $q          = "EXEC ViewEmployeesRequests '$username'";
+        $getResults = sqlsrv_query($conn, $q);
+
+        while($requests = sqlsrv_fetch_array($getResults, SQLSRV_FETCH_ASSOC))
+        {
+            // Attributes
+            $code                     = $requests['code'];
+            $date_created             = $requests['date_created'];
+            $start_date               = $requests['start_date'];
+            $end_date                 = $requests['end_date'];
+            $total_days               = $requests['total_days'];
+            $manager_decision         = $requests['manager_decision'];
+            $hr_decision              = $requests['hr_decision'];
+            $hr_rejecting_reason      = $requests['hr_rejecting_reason'];
+            $manager_rejecting_reason = $requests['manager_rejecting_reason'];
+            $employee_username        = $requests['employee_username'];
+            $manager_reviewer         = $requests['manager_reviewer'];
+            $hr_employee_reviewer     = $requests['hr_employee_reviewer'];
+
+            echo "
+            <div class='card mb-3' style='width: 21%; display: inline-block; align-items: center'>
+            <h3 class='card-header'>$code</h3>
+            <div class='card-body'>";
+            /*
+            <p class='card-text' style='color: white'>Date Created: $date_created</p>        
+            <p class='card-text' style='color: white'>Start Date: $start_date</p>
+            <p class='card-text' style='color: white'>End Date: $end_date</p>
+            */
+            echo "
+            <p class='card-text' style='color: white'>Employee: $employee_username</p>
+            </div>
+            <ul class='list-group list-group-flush'>
+            <li class='list-group-item'>Total Days: $total_days</li>
+            <li class='list-group-item'>Manager Decision: $manager_decision</li>
+            <li class='list-group-item'>HR Decision: $hr_decision</li>
+            <li class='list-group-item'>HR Rejecting Reason: $hr_rejecting_reason</li>
+            <li class='list-group-item'>Manager Rejecting Reason: $manager_rejecting_reason</li>
+            <li class='list-group-item'>Manager Reviewer: $manager_reviewer</li>
+            <li class='list-group-item'>HR Employee Reviewer: $hr_employee_reviewer</li>
+            </ul>
+            <div class='card-body'>
+            <a href='staffrequests.php?code=$code' class='card-link' ><button type='submit' class='btn btn-success' style='background: #34B3A0; border-color: #34B3A0' >Accept</button></a>
+            <a href='rejectstaffrequests.php?code=$code' class='card-link' ><button type='submit' class='btn btn-danger' style='border-color: #34B3A0' >Reject</button></a>
+            </div>
+            </div>";
+        }
+
+        function ManagerAcceptRequests($username, $code, $conn)
+        {
+            $q = "EXEC ManagerAcceptRequests '$username', '$code'";
+            $getResults = sqlsrv_query($conn, $q);
+            if (isset($getResults))
+            {
+                echo "<div class='alert alert-dismissible alert-success'>
+                <button type='button' class='close' data-dismiss='alert'>&times;</button>
+                <strong> Success!</strong> Request Accepted</div>";
+            }
+            else
+            {
+                echo "<div class='alert alert-dismissible alert-danger'>
+                <button type='button' class='close' data-dismiss='alert'>&times;</button>
+                <strong>Oh snap!</strong> Could not accept the request! </div>";
+            }
+        }
+
+        function ManagerRejectRequests($username, $code, $reason, $conn)
+        {
+            $q = "EXEC ManagerRejectRequests '$username', '$code', '$reason'";
+            $getResults = sqlsrv_query($conn, $q);
+            if (isset($getResults))
+            {
+                echo "<div class='alert alert-dismissible alert-success'>
+                <button type='button' class='close' data-dismiss='alert'>&times;</button>
+                <strong> Success!</strong> Request Rejected</div>";
+            }
+            else
+            {
+                echo "<div class='alert alert-dismissible alert-danger'>
+                <button type='button' class='close' data-dismiss='alert'>&times;</button>
+                <strong>Oh snap!</strong> Could not reject the request! </div>";
+            }
+        }
+        
+    }
+
 ?>
