@@ -1058,7 +1058,7 @@ GO
 CREATE PROC ViewRecievedEmails
        @user_email VARCHAR(64)
 AS
-       SELECT E.sender_email , Er.recepient_email, E.subject, E.body
+       SELECT E.* , Er.recepient_email
        FROM Emails E, Emails_Recepients Er
        WHERE E.id = Er.id AND Er.recepient_email = @user_email  
 

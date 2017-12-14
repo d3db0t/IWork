@@ -24,6 +24,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="emails.php">Emails</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="goback.php">Back to home</a>
+                    </li>
                 </ul>
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
@@ -45,7 +48,9 @@
         $username = $_SESSION["username"];
         $query = "EXEC ViewRequests '$username'";
         $getResults = sqlsrv_query($conn, $query);
-        echo "<h1 style='color: #34B3A0'>Requests</h1>";        
+        echo "<h1 style='color: #34B3A0'>Requests</h1>"; 
+        dieIfFalse($getResults, "<p class='diepar'>No requests are found!</p>");
+        dieIfNoRows($getResults, "<p class='diepar'>No requests are found!</p>");       
         echo "<table class='table table-striped table-hover table-bordered'>
                     <thead class='thead-dark'>
                     <tr>

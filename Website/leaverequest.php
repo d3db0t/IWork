@@ -24,6 +24,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="emails.php">Emails</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="goback.php">Back to home</a>
+                    </li>
                 </ul>
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">

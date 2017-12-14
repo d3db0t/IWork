@@ -24,6 +24,9 @@
                     <li class="nav-item active">
                         <a class="nav-link" href="emails.php">Emails</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="goback.php">Back to home</a>
+                    </li>
                 </ul>
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
@@ -45,12 +48,16 @@
         
         $query = "EXEC ViewRecievedEmails '$mail'";
         $getResults = sqlsrv_query($conn, $query);
+        echo "<h1 style='color: #34B3A0'>Emails</h1>";
+       // dieIfFalse($getResults, "<p class='diepar'>No emails are found!</p>");
+       // dieIfNoRows($getResults, "<p class='diepar'>No emails are found!</p>");
         while($row = sqlsrv_fetch_array($getResults, SQLSRV_FETCH_ASSOC))
         {
             $sender = $row["sender_email"];
             $reciever = $row["recepient_email"];
             $subject = $row["subject"];
             $body = $row["body"];
+            $code = $row["id"];
             echo "<div class='card mb-3' style='width: 21%; display: inline-block; align-items: center'>
             <h3 class='card-header'>$subject</h3>
             <ul class='list-group list-group-flush'>
@@ -61,9 +68,11 @@
             <p class='card-text' style='color: white'>$body</p>
             </div>     
             <div class='card-body'>
-            <a href='reply.php' class='card-link'><button type='submit' class='btn btn-success' style='background: #34B3A0; border-color: #34B3A0' >Reply</button></a>
+            <a href='reply.php?code=$code' class='card-link'><button type='submit' class='btn btn-success' style='background: #34B3A0; border-color: #34B3A0' >Reply</button></a>
             </div>
             </div>";
         }
+        echo"
+        <a href='sendemail.php' class='card-link'><button type='submit' class='btn btn-success' style='background: #34B3A0; border-color: #34B3A0' >Send Mail</button></a>";
     ?>
 </html>
