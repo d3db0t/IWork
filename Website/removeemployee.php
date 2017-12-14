@@ -77,7 +77,8 @@
                 $employeeusername = $_POST['employeeusername'];
                 $q                = "EXEC RemoveEmployeeFromProject '$manager', '$employeeusername', '$projectname'";
                 $getResults       = sqlsrv_query($conn, $q);
-                if (isset($getResults))
+                $rows_affected = sqlsrv_rows_affected($getResults);
+                if ($rows_affected > 0)
                 {
                     echo "<div class='alert alert-dismissible alert-success'>
                     <button type='button' class='close' data-dismiss='alert'>&times;</button>
