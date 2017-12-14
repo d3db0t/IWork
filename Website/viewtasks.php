@@ -84,54 +84,55 @@
                 $q             = "EXEC ProjectTasks '$manager', '$projectname', '$status'";
                 $getResults    = sqlsrv_query($conn, $q);
                 ViewTasks($manager, $projectname, $status, $conn);
-                $taskname      = $_GET['taskname'];
-                $deadline      = $_GET['deadline'];
-                if (isset($_GET['decision']) and $_GET['decision'] === 'accept')
+                
+            }
+            $taskname      = $_GET['taskname'];
+            $deadline      = $_GET['deadline'];
+            if (isset($_GET['decision']) and $_GET['decision'] === 'accept')
+            {
+                if (isset($_GET['taskname']))
                 {
-                    if (isset($_GET['taskname']))
+                    $q2 = "EXEC CloseTask '$manager', '$taskname'";
+                    $q2results = sqlsrv_query($conn, $q2);
+                    $rows_affected = sqlsrv_rows_affected($q2results);
+                    if ($rows_affected > 0)
                     {
-                        $q2 = "EXEC CloseTask '$manager', '$taskname'";
-                        $q2results = sqlsrv_query($conn, $q2);
-                        $rows_affected = sqlsrv_rows_affected($q2results);
-                        if ($rows_affected > 0)
-                        {
-                            echo "<div class='alert alert-dismissible alert-success'>
-                            <button type='button' class='close' data-dismiss='alert'>&times;</button>
-                            <strong> Success!</strong> Task accepted!</div>";
-                        }
-                        else
-                        {
-                            echo "<div class='alert alert-dismissible alert-danger'>
-                            <button type='button' class='close' data-dismiss='alert'>&times;</button>
-                            <strong>Oh snap!</strong> could not review task! </div>";
-                        }
+                        echo "<div class='alert alert-dismissible alert-success'>
+                        <button type='button' class='close' data-dismiss='alert'>&times;</button>
+                        <strong> Success!</strong> Task accepted!</div>";
+                    }
+                    else
+                    {
+                        echo "<div class='alert alert-dismissible alert-danger'>
+                        <button type='button' class='close' data-dismiss='alert'>&times;</button>
+                        <strong>Oh snap!</strong> could not review task! </div>";
                     }
                 }
-                else if (isset($_GET['decision']) and $_GET['decision'] === 'reject')
+            }
+            else if (isset($_GET['decision']) and $_GET['decision'] === 'reject')
+            {
+                if (isset($_GET['taskname']) and isset($_GET['deadline']))
                 {
-                    if (isset($_GET['taskname']) and isset($_GET['deadline']))
+                    $q2 = "EXEC AssignTask '$manager', '$taskname', '$deadline'";
+                    $q2results = sqlsrv_query($conn, $q2);
+                    $rows_affected = sqlsrv_rows_affected($q2results);
+                    if ($rows_affected > 0)
                     {
-                        $q2 = "EXEC AssignTask '$manager', '$taskname', '$deadline'";
-                        $q2results = sqlsrv_query($conn, $q2);
-                        $rows_affected = sqlsrv_rows_affected($q2results);
-                        if ($rows_affected > 0)
-                        {
-                            echo "<div class='alert alert-dismissible alert-success'>
-                            <button type='button' class='close' data-dismiss='alert'>&times;</button>
-                            <strong> Success!</strong> Task rejected!</div>";
-                        }
-                        else
-                        {
-                            echo "<div class='alert alert-dismissible alert-danger'>
-                            <button type='button' class='close' data-dismiss='alert'>&times;</button>
-                            <strong>Oh snap!</strong> could not review task! </div>";
-                        }
+                        echo "<div class='alert alert-dismissible alert-success'>
+                        <button type='button' class='close' data-dismiss='alert'>&times;</button>
+                        <strong> Success!</strong> Task rejected!</div>";
+                    }
+                    else
+                    {
+                        echo "<div class='alert alert-dismissible alert-danger'>
+                        <button type='button' class='close' data-dismiss='alert'>&times;</button>
+                        <strong>Oh snap!</strong> could not review task! </div>";
                     }
                 }
-                else
-                {
-                    echo "<p>No tasks are found!</p>";
-                }
+            }
+            else
+            {
+                echo "<p>No tasks are found!</p>";
             }
         ?>
     </body>

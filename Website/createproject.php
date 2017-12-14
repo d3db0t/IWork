@@ -313,10 +313,10 @@
                 $companyaddressq   = "SELECT company_address FROM Staff_Members WHERE username = '$manager'";
                 $getCompanyName    = sqlsrv_query($conn, $companynameq);
                 $getCompanyAddress = sqlsrv_query($conn, $companyaddressq);
-                $comapnyName       = sqlsrv_fetch_array($getResults, SQLSRV_FETCH_ASSOC)['company_name'];
-                $companyAddress    = sqlsrv_fetch_array($getResults, SQLSRV_FETCH_ASSOC)['company_address'];
+                $companyName       = sqlsrv_fetch_array($getCompanyName, SQLSRV_FETCH_ASSOC)['company_name'];
+                $companyAddress    = sqlsrv_fetch_array($getCompanyAddress, SQLSRV_FETCH_ASSOC)['company_address'];
 
-                $q                 = "EXEC CreateProject '$manager', '$projectname', '$comapnyName', '$companyAddress', '$start_date', '$end_date'";
+                $q                 = "EXEC CreateProject '$manager', '$projectname', '$companyName', '$companyAddress', '$start_date', '$end_date'";
                 $getResults        = sqlsrv_query($conn, $q);
                 $rows_affected = sqlsrv_rows_affected($getResults);
                 if ($rows_affected > 0)

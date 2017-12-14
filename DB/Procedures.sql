@@ -1850,7 +1850,7 @@ CREATE PROC CreateTask
 AS
        DECLARE @company_name VARCHAR(50)
        DECLARE @company_address VARCHAR(100)
-       IF(NOT EXISTS(
+       IF(EXISTS(
              SELECT *
              FROM Projects
              WHERE name = @project_name
