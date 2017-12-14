@@ -1850,13 +1850,19 @@ CREATE PROC CreateTask
 AS
        DECLARE @company_name VARCHAR(50)
        DECLARE @company_address VARCHAR(100)
+       IF(NOT EXISTS(
+             SELECT *
+             FROM Projects
+             WHERE name = @project_name
+       ))
+       BEGIN
+            SELECT @company_name = company_name, @company_address = company_address
+            FROM Staff_Members
+            WHERE @username = username
 
-       SELECT @company_name = company_name, @company_address = company_address
-       FROM Staff_Members
-       WHERE @username = username
-
-       INSERT INTO Tasks(name, project_name,company_name,company_address,deadline,description,status,manager_creator)
-       VALUES (@name, @project_name, @company_name, @company_address, @deadline, @description,'Open', @username)
+            INSERT INTO Tasks(name, project_name,company_name,company_address,deadline,description,status,manager_creator)
+            VALUES (@name, @project_name, @company_name, @company_address, @deadline, @description,'Open', @username)
+       END
           
 GO
 
