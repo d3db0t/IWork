@@ -45,6 +45,12 @@
                 <li class="nav-item">
                     <a class="nav-link" href="changeassignedemployee.php">ChangeAssignedEmployee</a>
                 </li>
+                <li class="nav-item">
+					<a class="nav-link" href="viewtasks.php">ViewTasks</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="sportalhome.php">StaffPortal</a>
+                </li>
 				</ul>
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
@@ -60,7 +66,7 @@
             $manager = $_SESSION['username'];
             ManagerViewJobApplications($manager, $conn);
             $depcode = '#' . $_GET['depcode'];
-            if (isset($_GET['decision']) and $_GET['decision'] === 'accepted')
+            if (isset($_GET['decision']) and $_GET['decision'] === 'accept')
             {
                 if (isset($_GET['jsusername']) and isset($_GET['title']) and isset($_GET['companyname']) and isset($_GET['companyaddress']) and isset($_GET['depcode']))
                 {

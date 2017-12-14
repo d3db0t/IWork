@@ -45,6 +45,12 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="changeassignedemployee.php">ChangeAssignedEmployee<span class="sr-only">(current)</span></a>
                 </li>
+                <li class="nav-item">
+					<a class="nav-link" href="viewtasks.php">ViewTasks</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="sportalhome.php">StaffPortal</a>
+                </li>
 				</ul>
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
