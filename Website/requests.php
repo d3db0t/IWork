@@ -73,7 +73,10 @@
                 </tr>";
         }
 
-                echo "</tbody></table> ";
+        echo "</tbody></table> ";
 
+        echo"
+        <a href='leaverequest.php' class='card-link'><button type='submit' class='btn btn-success' style='background: #34B3A0; border-color: #34B3A0' >Apply For Leave Request</button></a>
+        <a href='businessrequest.php' class='card-link'><button type='submit' class='btn btn-success' style='background: #34B3A0; border-color: #34B3A0' >Apply For Business Request</button></a>";
     ?>
 </html>
