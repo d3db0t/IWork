@@ -434,9 +434,9 @@
         {
             // Attributes
             $code                     = $requests['code'];
-            $date_created             = $requests['date_created'];
-            $start_date               = $requests['start_date'];
-            $end_date                 = $requests['end_date'];
+            $date_created             = $requests['date_created']->format('Y-m-d H:i:s');
+            $start_date               = $requests['start_date']->format('Y-m-d H:i:s');
+            $end_date                 = $requests['end_date']->format('Y-m-d H:i:s');
             $total_days               = $requests['total_days'];
             $manager_decision         = $requests['manager_decision'];
             $hr_decision              = $requests['hr_decision'];
@@ -449,13 +449,10 @@
             echo "
             <div class='card mb-3' style='width: 21%; display: inline-block; align-items: center'>
             <h3 class='card-header'>$code</h3>
-            <div class='card-body'>";
-            /*
+            <div class='card-body'>
             <p class='card-text' style='color: white'>Date Created: $date_created</p>        
             <p class='card-text' style='color: white'>Start Date: $start_date</p>
             <p class='card-text' style='color: white'>End Date: $end_date</p>
-            */
-            echo "
             <p class='card-text' style='color: white'>Employee: $employee_username</p>
             </div>
             <ul class='list-group list-group-flush'>
@@ -473,43 +470,150 @@
             </div>
             </div>";
         }
-
-        function ManagerAcceptRequests($username, $code, $conn)
-        {
-            $q = "EXEC ManagerAcceptRequests '$username', '$code'";
-            $getResults = sqlsrv_query($conn, $q);
-            if (isset($getResults))
-            {
-                echo "<div class='alert alert-dismissible alert-success'>
-                <button type='button' class='close' data-dismiss='alert'>&times;</button>
-                <strong> Success!</strong> Request Accepted</div>";
-            }
-            else
-            {
-                echo "<div class='alert alert-dismissible alert-danger'>
-                <button type='button' class='close' data-dismiss='alert'>&times;</button>
-                <strong>Oh snap!</strong> Could not accept the request! </div>";
-            }
-        }
-
-        function ManagerRejectRequests($username, $code, $reason, $conn)
-        {
-            $q = "EXEC ManagerRejectRequests '$username', '$code', '$reason'";
-            $getResults = sqlsrv_query($conn, $q);
-            if (isset($getResults))
-            {
-                echo "<div class='alert alert-dismissible alert-success'>
-                <button type='button' class='close' data-dismiss='alert'>&times;</button>
-                <strong> Success!</strong> Request Rejected</div>";
-            }
-            else
-            {
-                echo "<div class='alert alert-dismissible alert-danger'>
-                <button type='button' class='close' data-dismiss='alert'>&times;</button>
-                <strong>Oh snap!</strong> Could not reject the request! </div>";
-            }
-        }
-        
     }
 
+    function ManagerAcceptRequests($username, $code, $conn)
+    {
+        $q = "EXEC ManagerAcceptRequests '$username', '$code'";
+        $getResults = sqlsrv_query($conn, $q);
+        if (isset($getResults))
+        {
+            echo "<div class='alert alert-dismissible alert-success'>
+            <button type='button' class='close' data-dismiss='alert'>&times;</button>
+            <strong> Success!</strong> Request Accepted</div>";
+        }
+        else
+        {
+            echo "<div class='alert alert-dismissible alert-danger'>
+            <button type='button' class='close' data-dismiss='alert'>&times;</button>
+            <strong>Oh snap!</strong> Could not accept the request! </div>";
+        }
+    }
+
+    function ManagerRejectRequests($username, $code, $reason, $conn)
+    {
+        $q = "EXEC ManagerRejectRequests '$username', '$code', '$reason'";
+        $getResults = sqlsrv_query($conn, $q);
+        if (isset($getResults))
+        {
+            echo "<div class='alert alert-dismissible alert-success'>
+            <button type='button' class='close' data-dismiss='alert'>&times;</button>
+            <strong> Success!</strong> Request Rejected</div>";
+        }
+        else
+        {
+            echo "<div class='alert alert-dismissible alert-danger'>
+            <button type='button' class='close' data-dismiss='alert'>&times;</button>
+            <strong>Oh snap!</strong> Could not reject the request! </div>";
+        }
+    }
+
+    function ManagerViewJobApplications($username, $conn)
+    {
+        $q = "EXEC ManagerViewJobApplications '$username'";
+        $getResults = sqlsrv_query($conn, $q);
+        while($applications = sqlsrv_fetch_array($getResults, SQLSRV_FETCH_ASSOC))
+        {
+            $jobSeeker            = $applications['username'];
+            $experience_years     = $applications['experience_years'];
+            $email                = $applications['email'];
+            $birth_date           = $applications['birth_date']->format('Y-m-d H:i:s');
+            $first_name           = $applications['first_name'];
+            $middle_name          = $applications['middle_name'];
+            $last_name            = $applications['last_name'];
+            $age                  = $applications['age'];
+            $title                = $applications['title'];
+            $application_deadline = $applications['application_deadline']->format('Y-m-d H:i:s');
+            $working_hours        = $applications['working_hours'];
+            $short_description    = $applications['short_description'];
+            $detailed_description = $applications['detailed_description'];
+            $job_experience_years = $applications['experience_years'];
+            $salary               = $applications['salary'];
+            $vacancies            = $applications['vacancies'];
+            $score                = $applications['score'];
+            $status               = $applications['status'];
+            $manager_response     = $applications['manager_response'];
+            $hr_employee_reviewer = $applications['hr_employee_reviewer'];
+            $manager_reviewer     = $applications['manager_reviewer'];
+
+            $company_name         = $applications['company_name'];
+            $company_address      = $applications['company_address'];
+            $department_code      = $applications['department_code'];
+            $depcode = substr($department_code, -2);
+
+            echo "
+            <div class='card mb-3' style='width: 21%; display: inline-block; align-items: center'>
+            <h3 class='card-header'>$title</h3>
+            <div class='card-body'>
+            <h5 class='card-title'>JobSeeker: $jobSeeker</h5>
+            <h6 class='card-subtitle' style='color: #34B3A0'>$email</h6>
+            </div>
+            <div class='card-body'>
+            <p class='card-text' style='color: white'>$status</p>
+            </div>
+            <ul class='list-group list-group-flush'>
+            <li class='list-group-item'>First Name: $first_name</li>
+            <li class='list-group-item'>Middle Name: $middle_name</li>
+            <li class='list-group-item'>Last Name: $last_name</li>
+            <li class='list-group-item'>age: $age</li>
+            <li class='list-group-item'>Birth Date: $birth_date</li>
+            <li class='list-group-item'>Experience Years: $experience_years</li>
+
+            <li class='list-group-item'>Working Hours: $working_hours</li>
+            <li class='list-group-item'>Short Description: $short_description</li>
+            <li class='list-group-item'>Detailed Description: $detailed_description</li>
+            <li class='list-group-item'>Salary: $salary</li>
+            <li class='list-group-item'>Job Experience Years: $job_experience_years</li>
+            <li class='list-group-item'>Deadline: $application_deadline</li>
+            <li class='list-group-item'>Vacancies: $vacancies</li>
+            <li class='list-group-item'>Manager Response: $manager_response</li>
+            <li class='list-group-item'>HR Reviewer: $hr_employee_reviewer</li>
+            <li class='list-group-item'>Manager Reviewer: $manager_reviewer</li>
+            </ul>
+            <h5 class='card-title'>Score: $score</h5>
+            <div class='card-body'>
+            <a href='jobapplications.php?decision=accept&jsusername=$jobSeeker&title=$title&companyname=$company_name&companyaddress=$company_address&depcode=$depcode&response=$manager_response' class='card-link' ><button type='submit' class='btn btn-success' style='background: #34B3A0; border-color: #34B3A0' >Accept</button></a>
+            <a href='jobapplications.php?decision=reject&jsusername=$jobSeeker&title=$title&companyname=$company_name&companyaddress=$company_address&depcode=$depcode' class='card-link' ><button type='submit' class='btn btn-danger' style='border-color: #34B3A0' >Reject</button></a>
+            </div>
+            </div>";
+        }
+    }
+
+    function ManagerAcceptJobApplication($username, $jobSeeker, $title, $company_name, $company_address, $department_code, $response, $conn)
+    {
+        $q = "EXEC ManagerAcceptJobApplication '$username', '$jobSeeker', '$title', '$company_name', '$company_address', '$department_code', '$response'";
+        $getResults = sqlsrv_query($conn, $q);
+        if (isset($getResults))
+        {
+            echo "<div class='alert alert-dismissible alert-success'>
+            <button type='button' class='close' data-dismiss='alert'>&times;</button>
+            <strong> Success!</strong> Application Accepted</div>";
+        }
+        else
+        {
+            echo "<div class='alert alert-dismissible alert-danger'>
+            <button type='button' class='close' data-dismiss='alert'>&times;</button>
+            <strong>Oh snap!</strong> Could not accept the application! </div>";
+        }
+
+    }
+
+    function ManagerRejectJobApplication($username, $jobSeeker, $title, $company_name, $company_address, $department_code, $conn)
+    {
+        $q = "EXEC ManagerRejectJobApplication '$username', '$jobSeeker', '$title', '$company_name', '$company_address', '$department_code'";
+        $getResults = sqlsrv_query($conn, $q);
+        if (isset($getResults))
+        {
+            echo "<div class='alert alert-dismissible alert-success'>
+            <button type='button' class='close' data-dismiss='alert'>&times;</button>
+            <strong> Success!</strong> Application Rejected</div>";
+        }
+        else
+        {
+            echo "<div class='alert alert-dismissible alert-danger'>
+            <button type='button' class='close' data-dismiss='alert'>&times;</button>
+            <strong>Oh snap!</strong> Could not reject the application! </div>";
+        }
+    }
+        
 ?>
