@@ -16,6 +16,17 @@
 					<a class="nav-link" href="rehome.php">Home <span class="sr-only">(current)</span></a>
 				</li>
                 </ul>
+				<ul class="navbar-nav mr-auto">
+				<li class="nav-item active">
+					<a class="nav-link" href="refile.php">Regular Employee Info<span class="sr-only">(current)</span></a>
+				</li>
+                </ul>
+				</ul>
+				<ul class="navbar-nav mr-auto">
+				<li class="nav-item active">
+					<a class="nav-link" href="sportalhome.php">Staff Portal<span class="sr-only">(current)</span></a>
+				</li>
+                </ul>
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
                         <a class="nav-link" href="logout.php" style='color: #34B3A0'><button type="button" class="btn btn-outline-primary">Logout</button></a>
