@@ -210,7 +210,10 @@
                 $rows_affected = sqlsrv_rows_affected($result);            
                 if($rows_affected > 0)
                 {
-                    redirectUserByRole($attributes["username"], $conn);
+                    //redirectUserByRole($attributes["username"], $conn);
+                    echo "<div class='alert alert-dismissible alert-success'>
+                    <button type='button' class='close' data-dismiss='alert'>&times;</button>
+                    <strong>Well done!</strong><a href='login.php' class='alert-link'>Sign in here</a></div>";
                 }
                 else
                 {
