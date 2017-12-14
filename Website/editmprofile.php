@@ -29,6 +29,12 @@
 				</li>
 				<li class="nav-item">
                     <a class="nav-link" href="createproject.php">CreateProject</a>
+				</li>
+				<li class="nav-item">
+                    <a class="nav-link" href="assignemployee.php">AssignEmployee</a>
+				</li>
+				<li class="nav-item">
+                    <a class="nav-link" href="removeemployee.php">RemoveEmployee</a>
                 </li>
 				</ul>
                 <ul class="navbar-nav ml-auto">

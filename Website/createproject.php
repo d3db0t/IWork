@@ -29,7 +29,13 @@
                 </li>
                 <li class="nav-item active">
                     <a class="nav-link" href="createproject.php">CreateProject <span class="sr-only">(current)</span></a>
-				</li>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="assignemployee.php">AssignEmployee</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="removeemployee.php">RemoveEmployee</a>
+                </li>
 				</ul>
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
