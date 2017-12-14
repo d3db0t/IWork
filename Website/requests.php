@@ -53,6 +53,7 @@
                     <th>HR decision</th>
                     <th>Manager decision</th>
                     <th>Type</th>
+                    <th></th>
                     </tr>
                     </thead>
                     <tbody>";
@@ -67,6 +68,8 @@
                 <td>$managerdecision</td>
                 <td>$hrdecision</td>
                 <td>$type</td>
+                <td>              
+                <a href='deleterequest.php?code=$code' class='card-link'><button type='submit' class='btn btn-success' style='background: #34B3A0; border-color: #34B3A0' >Delete</button></a>
                 </tr>";
         }
 
