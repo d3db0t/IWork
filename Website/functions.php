@@ -615,5 +615,42 @@
             <strong>Oh snap!</strong> Could not reject the application! </div>";
         }
     }
+
+    function ViewTasks($username, $projectname, $status, $conn)
+    {
+        $q = "EXEC ProjectTasks '$username', '$projectname', '$status'";
+        $getResults = sqlsrv_query($conn, $q);
+        while($tasks = sqlsrv_fetch_array($getResults, SQLSRV_FETCH_ASSOC))
+        {
+            $name = $tasks['name'];
+            $projectname = $tasks['projectname'];
+            $deadline = $tasks['deadline']->format('Y-m-d H:i:s');
+            $description = $tasks['description'];
+            $status = $tasks['status'];
+            $managercreator = $tasks['manager_creator'];
+            $employeeassigned = $tasks['employee_assigned'];
+
+            echo "
+            <div class='card mb-3' style='width: 21%; display: inline-block; align-items: center'>
+            <h3 class='card-header'>$name</h3>
+            <div class='card-body'>
+            <h5 class='card-title'>Project Name: $projectname</h5>
+            <h6 class='card-subtitle' style='color: #34B3A0'>Deadline: $deadline</h6>
+            </div>
+            <div class='card-body'>
+            <p class='card-text' style='color: white'>$status</p>
+            </div>
+            <ul class='list-group list-group-flush'>
+            <li class='list-group-item'>Description: $description</li>
+            <li class='list-group-item'>Manager Creator: $managercreator</li>
+            </ul>
+            <h5 class='card-title'>Employee Assigned: $employeeassigned</h5>
+            <div class='card-body'>
+            <a href='viewtasks.php?decision=accept&taskname=$name' class='card-link' ><button type='submit' class='btn btn-success' style='background: #34B3A0; border-color: #34B3A0' >Accept</button></a>
+            <a href='viewtasks.php?decision=reject&taskname=$name&deadline=$deadline' class='card-link' ><button type='submit' class='btn btn-danger' style='border-color: #34B3A0' >Reject</button></a>
+            </div>
+            </div>";
+        }
+    }
         
 ?>
