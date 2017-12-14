@@ -36,6 +36,12 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="removeemployee.php">RemoveEmployee <span class="sr-only">(current)</span></a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="createtask.php">CreateTask</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="assignemployeetotask.php">AssignEmployeeToTask</a>
+                </li>
 				</ul>
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
